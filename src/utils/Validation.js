@@ -36,8 +36,8 @@ const validateBonus = {
     if (nonNumCheck.test(bonusNum)) throw new Error(ERROR.BONUS);
   },
 
-  validateBonusDuplicate(bonusNum, winninNum) {
-    const isDuplicate = winninNum.includes(bonusNum);
+  validateBonusDuplicate(bonusNum, winningNum) {
+    const isDuplicate = winningNum.includes(bonusNum);
     if (isDuplicate) throw new Error(ERROR.BONUS);
   },
 
