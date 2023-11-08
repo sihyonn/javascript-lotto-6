@@ -24,5 +24,22 @@ class Result extends Lotto {
     );
     Validation.validateBonus.validateBonusRange(bonusNum);
   }
+
+  #initializeMatchObj() {
+    return {
+      three: 0,
+      four: 0,
+      five: 0,
+      bonus: 0,
+      six: 0,
+    };
+  }
+
+  countMatchNumbers(curLotto) {
+    const count = curLotto.filter(
+      (number) => this.winningNum.includes(number) || this.#bonusNum === number
+    ).length;
+    return count;
+  }
 }
 export default Result;
