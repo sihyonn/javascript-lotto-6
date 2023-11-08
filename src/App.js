@@ -1,3 +1,4 @@
+import Lotto from './Lotto.js';
 import MakeLotto from './MakeLotto.js';
 import { Input } from './UI/Input.js';
 
@@ -19,6 +20,16 @@ class App {
         lottos = await makeLotto.makeLottos();
         validAmount = true;
       } catch (e) {}
+    }
+
+    while (!validWinningNum) {
+      try {
+        winningNum = await Input.getWinningNumbers();
+        const lotto = new Lotto(winningNum);
+        validWinningNum = true;
+      } catch (e) {
+        Console.print(e);
+      }
     }
   }
 }
