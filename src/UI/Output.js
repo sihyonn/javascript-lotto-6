@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT } from '../constants/Messages.js';
 
-export const Output = {
+const Output = {
   // 발행한 로또 구매개수 출력
   printPurchaseQuantity(quantity) {
     Console.print(`${quantity}` + OUTPUT.PURCHASE);
@@ -27,3 +27,5 @@ export const Output = {
     Console.print(OUTPUT.RETURN_RATE(rate));
   },
 };
+
+export default Output;
