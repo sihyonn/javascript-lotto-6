@@ -1,8 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import CONSTANT from './constants/constant.js';
 import Validation from './utils/Validation.js';
 import Lotto from './Lotto.js';
-import Validation from './utils/Validation.js';
 import Output from './UI/Output.js';
 import { LOTTO } from './constants/NumValues.js';
 
