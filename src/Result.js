@@ -2,6 +2,8 @@ import { Random, Console } from '@woowacourse/mission-utils';
 
 import Validation from './utils/Validation.js';
 import Lotto from './Lotto.js';
+import { MATCH_AMOUNT } from './constants/NumValues';
+import Output from './UI/Output.js';
 
 class Result extends Lotto {
   #bonusNum;
@@ -16,12 +18,9 @@ class Result extends Lotto {
     this.#lottos = lottos;
   }
 
-  #validate(number, bonusNum, amount, lottos) {
+  #validate(numbers, bonusNum, amount, lottos) {
     Validation.validateBonus.validateBonusType(bonusNum);
-    Validation.validateBonus.validateBonusDuplicate(
-      bonusNum,
-      this.getWinningNum
-    );
+    Validation.validateBonus.validateBonusDuplicate(bonusNum, this.WinningNum);
     Validation.validateBonus.validateBonusRange(bonusNum);
   }
 
@@ -36,11 +35,15 @@ class Result extends Lotto {
   }
 
   countMatchNumbers(curLotto) {
-    const count = curLotto.filter(
-      (number) => this.winningNum.includes(number) || this.#bonusNum === number
-    ).length;
+    let count = 0;
+
+    curLotto.forEach((number) => {
+      if (this.WinningNum.includes(number)) count += 1;
+      if (this.#bonusNum.includes(number)) count += 1;
+    });
     return count;
   }
+
   updateMatchObj(matchObj, count, curLotto) {
     switch (count) {
       case 3:
@@ -67,6 +70,38 @@ class Result extends Lotto {
       this.updateMatchObj(matchObj, count, curLotto);
     });
     return matchObj;
+  }
+
+  // 수익률구하기
+  calculateRevenue(matchResult, matchAmountObj) {
+    let revenue = 0;
+
+    Object.entries(matchResult).forEach(([key, value]) => {
+      if (value) {
+        revenue += matchAmountObj[key] * value;
+      }
+    });
+    return revenue;
+  }
+
+  async #getRateOfReturn() {
+    const matchResult = await this.#isMatch();
+    const matchAmountObj = {
+      three: MATCH_AMOUNT.THREE,
+      four: MATCH_AMOUNT.FOUR,
+      five: MATCH_AMOUNT.FIVE,
+      bonus: MATCH_AMOUNT.FIVE_BONUS,
+      six: MATCH_AMOUNT.SIX,
+    };
+
+    const revenue = this.calculateRevenue(matchResult, matchAmountObj);
+    const rateOfReutrn = (revenue / (this.#amount / 100)).toFixed(1);
+    return rateOfReutrn;
+  }
+
+  async printTotalResult() {
+    Output.printWinningStatistics(await this.#isMatch());
+    Output.printRateOfReturn(await this.#getRateOfReturn());
   }
 }
 export default Result;
