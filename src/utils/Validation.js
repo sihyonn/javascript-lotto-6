@@ -37,8 +37,11 @@ const validateBonus = {
   },
 
   validateBonusDuplicate(bonusNum, winningNum) {
-    const isDuplicate = winningNum.includes(bonusNum);
-    if (isDuplicate) throw new Error(ERROR.BONUS);
+    winningNum.map((item, idx) => {
+      if (item === parseInt(bonusNum, 10)) {
+        throw new Error(CONSTANT.error.invalidBonusNumDuplicate);
+      }
+    });
   },
 
   validateBonusRange(bonusNum) {

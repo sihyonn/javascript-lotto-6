@@ -65,10 +65,12 @@ class Result extends Lotto {
 
   async #isMatch() {
     const matchObj = this.#initializeMatchObj();
-    this.#lottos = this.countMatchNumbers((curLotto) => {
+
+    this.#lottos.forEach((curLotto) => {
       const count = this.countMatchNumbers(curLotto);
       this.updateMatchObj(matchObj, count, curLotto);
     });
+
     return matchObj;
   }
 

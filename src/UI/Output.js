@@ -17,8 +17,8 @@ const Output = {
   // 당첨통계 출력
   printWinningStatistics(winningInfo) {
     Console.print(OUTPUT.WINNING_STATS);
-    OUTPUT.RESULT.forEach((v, idx) => {
-      Console.print(OUTPUT.RESULT + `${winningInfo[idx]}개`);
+    Object.entries(winningInfo).forEach(([key, value], idx) => {
+      Console.print(OUTPUT.RESULT[idx] + `${value}개`);
     });
   },
 
