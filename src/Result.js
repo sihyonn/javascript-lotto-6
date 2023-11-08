@@ -20,7 +20,7 @@ class Result extends Lotto {
 
   #validate(numbers, bonusNum, amount, lottos) {
     Validation.validateBonus.validateBonusType(bonusNum);
-    Validation.validateBonus.validateBonusDuplicate(bonusNum, this.WinningNum);
+    Validation.validateBonus.validateBonusDuplicate(bonusNum, numbers);
     Validation.validateBonus.validateBonusRange(bonusNum);
   }
 
@@ -38,8 +38,12 @@ class Result extends Lotto {
     let count = 0;
 
     curLotto.forEach((number) => {
-      if (this.WinningNum.includes(number)) count += 1;
-      if (this.#bonusNum.includes(number)) count += 1;
+      if (this.winningNum.includes(number)) {
+        count += 1;
+      }
+      if (this.#bonusNum.includes(number)) {
+        count += 1;
+      }
     });
     return count;
   }

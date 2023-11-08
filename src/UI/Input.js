@@ -1,5 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT } from '../constants/Messages.js';
 export const Input = {
   // 구매금액
   async getPurchaseAmout(msg) {

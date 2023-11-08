@@ -14,7 +14,7 @@ class Lotto {
     Validation.validateLotto.validateLottoLength(numbers);
   }
 
-  getWinningNum() {
+  get winningNum() {
     return this.#numbers;
   }
 }
