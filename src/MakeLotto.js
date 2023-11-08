@@ -39,10 +39,10 @@ class MakeLotto extends Lotto {
     const quantity = this.#amount / LOTTO.UNIT;
     Output.printPurchaseQuantity(quantity);
 
-    const myLottos = this.#makeLottoList(quantity);
+    const lottos = this.#makeLottoList(quantity);
     Console.print('');
 
-    return myLottos;
+    return lottos;
   }
 }
 
